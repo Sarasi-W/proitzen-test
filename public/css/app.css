@@ -11213,3 +11213,7 @@ fieldset:disabled .btn {
   grid-template-columns: 1fr 3fr;
   grid-gap: 20px;
 }
+
+.form-section {
+    background: #e3e2de;
+}
