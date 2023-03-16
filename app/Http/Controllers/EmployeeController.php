@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Salary;
 use App\Models\Title;
+use App\Http\Traits\SalaryTrait;
+use App\Http\Traits\TitleTrait;
+
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+    use TitleTrait, SalaryTrait;
     /**
      * Display a listing of the resource.
      *
@@ -41,29 +45,9 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'date_of_birth' => 'required|date|before:-16 years',
-            'hire_date' => 'required|date|before:now',
-            'gender' => 'required|in:female,male,other',
-            'amount' => 'required|numeric|min:1',
-            'salary_from_date' => 'required|date',
-            'title' => 'required|string',
-            'title_from_date' => 'required|date',
-        ]);
-
-        if($request['salary_to_date']) {
-            $validated['salary_to_date'] = $request->validate([
-                'salary_to_date' => 'date|after:salary_from_date',
-            ])['salary_to_date'];
-        }
-
-        if($request['title_to_date']) {
-            $validated['title_to_date'] = $request->validate([
-                'title_to_date' => 'date|after:title_from_date',
-            ])['title_to_date'];
-        }
+        $validated = $this->validateEmployee($request);
+        $validatedSalaryInfo = $this->validateSalary($request);
+        $validatedTitleInfo = $this->validateTitle($request);
 
         $employee = Employee::create([
             'first_name' => $validated['first_name'],
@@ -73,20 +57,10 @@ class EmployeeController extends Controller
             'birth_date' => $validated['date_of_birth']
         ]);
 
-        $salary = Salary::create([
-            'emp_no' => $employee->id,
-            'amount' => $validated['amount'],
-            'from_date' => $validated['salary_from_date'],
-            'to_date' => $validated['salary_to_date'] ?? null,
-        ]);
+        $salary = $this->storeSalary($validatedSalaryInfo, $employee->id);
 
-        $title = Title::create([
-            'emp_no' => $employee->id,
-            'designation' => $validated['title'],
-            'from_date' => $validated['title_from_date'],
-            'to_date' => $validated['title_to_date'] ?? null,
-        ]);
-    
+        $title = $this->storeTitle($validatedTitleInfo, $employee->id);
+        
         return redirect()->back()->with('success', 'The employee is successfully created.');
     }
 
@@ -98,7 +72,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return view('employees.view', ['employee' => $employee]);
     }
 
     /**
@@ -109,7 +83,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('employees.form', ['employee' => $employee]);
     }
 
     /**
@@ -121,17 +95,63 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
-    }
+        // dd($request->slug);
+        if (in_array('profile', $request->slug))
+        {
+            $validated = $this->validateEmployee($request);
+        }
+        
+        if (in_array('salary', $request->slug)) 
+        {
+            $validatedSalaryInfo = $this->validateSalary($request);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
+        if (in_array('title', $request->slug)) 
+        {
+            $validatedTitleInfo = $this->validateTitle($request);
+        }
+
+        if (in_array('profile', $request->slug))
+        {
+            $employee->first_name = $validated['first_name'];
+            $employee->last_name = $validated['last_name'];
+            $employee->gender = $validated['gender'];
+            $employee->hire_date = $validated['hire_date'];
+            $employee->birth_date = $validated['date_of_birth'];
+            
+            $employee->save();
+        }
+        
+        if (in_array('salary', $request->slug)) 
+        {
+            $salary = $this->storeSalary($validatedSalaryInfo, $employee->id);
+        }
+
+        if (in_array('title', $request->slug)) 
+        {
+            $title = $this->storeTitle($validatedTitleInfo, $employee->id);
+        }
+
+        return redirect()->back()->with('success', 'The details are successfully updated.');
+    }
+    
     public function destroy(Employee $employee)
     {
-        //
+        $employee->salaries->each->delete();
+        $employee->titles->each->delete();
+        
+        $employee->delete();
+
+        return redirect()->back()->with('success', 'The employee record is successfully deleted.');
+    }
+    public function validateEmployee(Request $request)
+    {
+        return $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'date_of_birth' => 'required|date|before:-16 years',
+            'hire_date' => 'required|date|before:now',
+            'gender' => 'required|in:female,male,other',
+        ]);
     }
 }

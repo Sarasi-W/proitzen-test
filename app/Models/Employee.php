@@ -31,4 +31,14 @@ class Employee extends Model
     {
         return $this->hasMany(Title::class, 'emp_no', 'id');
     }
+
+    public function current_salary()
+    {
+        return $this->hasOne(Salary::class, 'emp_no', 'id')->latest();
+    }
+
+    public function current_title()
+    {
+        return $this->hasOne(Title::class, 'emp_no', 'id')->latest();
+    }
 }

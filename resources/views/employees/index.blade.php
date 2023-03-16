@@ -56,7 +56,7 @@
             </div>
 
             <div class="col-sm">
-                <a type="button" class="btn btn-primary float-right" href="{{route("employees.create")}}">
+                <a type="button" class="btn btn-primary float-end" href="{{route("employees.create")}}">
                     <i class="fa fa-plus-square" aria-hidden="true"></i> Add New Employee
                 </a>
             </div>
@@ -107,12 +107,32 @@
     </div>
 
     <div class="card-tools">
-        <ul class="pagination pagination-sm float-right">
+        <ul class="pagination pagination-sm float-end">
             {!! $employees->links() !!}
         </ul>
     </div>
+
+    @if (! $employees->isEmpty())
+        <x-delete-modal :id="$employee->id" />
+    @endif
 </div>
 
+<script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
 
+        function deleteData(id) {
+            var id = id;
+
+            var url = '{{ route("employees.destroy", ":id") }}';
+            url = url.replace(':id', id);
+            $("#deleteForm").attr('action', url);
+        }
+
+        function formSubmit() {
+            $("#deleteForm").submit();
+        }
+    </script>
 
 @endsection
