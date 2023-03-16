@@ -11204,8 +11204,8 @@ fieldset:disabled .btn {
 }
 
 #side-navigation > li a:hover:not(.active) {
-    background-color: #555;
-    color: white;
+  background-color: #555;
+  color: white;
 }
 
 .grid-container-element {
@@ -11215,5 +11215,5 @@ fieldset:disabled .btn {
 }
 
 .form-section {
-    background: #e3e2de;
+  background: #e3e2de;
 }
