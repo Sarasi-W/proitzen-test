@@ -1,6 +1,10 @@
 /node_modules
-/public/hot
+/public/.htaccss
+/public/favicon.ico
 /public/storage
+/public/index.php
+/public/mix-manifest.json
+public/robots.txt
 /storage/*.key
 /vendor
 .env
