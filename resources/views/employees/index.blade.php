@@ -65,8 +65,8 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Name</th>
+                            <th>Designation</th>
                             <th>Gender</th>
                             <th>Hire Date</th>
                             <th>Date of Birth</th>
@@ -84,8 +84,8 @@
                         @foreach ($employees as $employee)
                         <tr>
                             <td>{{ $employee->id }}</td>
-                            <td>{{ $employee->first_name }}</td>
-                            <td>{{ $employee->last_name }}</td>
+                            <td>{{ $employee->first_name }} {{ $employee->last_name }}</td>
+                            <td>{{ $employee->current_title->designation ?? '' }}</td>
                             <td>
                                 {{ ucfirst($employee->gender) }}
                             </td>

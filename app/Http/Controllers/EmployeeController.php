@@ -144,6 +144,20 @@ class EmployeeController extends Controller
 
         return redirect()->back()->with('success', 'The employee record is successfully deleted.');
     }
+
+    public function search(Request $request)
+    {
+        $employees = Employee::where('first_name', 'Like','%'.request()->get('q').'%')
+                            ->orWhere('last_name', 'Like','%'.request()->get('q').'%')
+                            ->orWhere('gender', '=', request()->get('q'))
+                            ->orWhereHas('titles', function($q) use ($request) {
+                                $q->where('designation', 'Like',$request->get('q').'%');
+                            })
+                            ->orderBy('id', 'desc')->paginate(10);
+
+        return view('employees.index', ['employees' => $employees]);
+    }
+    
     public function validateEmployee(Request $request)
     {
         return $request->validate([
