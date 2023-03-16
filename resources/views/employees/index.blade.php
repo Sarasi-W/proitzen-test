@@ -118,21 +118,21 @@
 </div>
 
 <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 
-        function deleteData(id) {
-            var id = id;
+    function deleteData(id) {
+        var id = id;
 
-            var url = '{{ route("employees.destroy", ":id") }}';
-            url = url.replace(':id', id);
-            $("#deleteForm").attr('action', url);
-        }
+        var url = '{{ route("employees.destroy", ":id") }}';
+        url = url.replace(':id', id);
+        $("#deleteForm").attr('action', url);
+    }
 
-        function formSubmit() {
-            $("#deleteForm").submit();
-        }
-    </script>
+    function formSubmit() {
+        $("#deleteForm").submit();
+    }
+</script>
 
 @endsection

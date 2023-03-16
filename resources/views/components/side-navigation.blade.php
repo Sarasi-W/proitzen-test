@@ -11,7 +11,7 @@
         <li>
             <a 
                 class="{{ in_array(Route::currentRouteName(), 
-                            ['employees.index', 'employees.create', 'employees.show', 'employees.edit']
+                            ['employees.index', 'employees.create', 'employees.show', 'employees.edit', 'employees.search']
                         ) ? 'active' : '' }}"
                 href="{{ route('employees.index') }}">
                 Employees
@@ -19,16 +19,20 @@
         </li>
         <li>
             <a 
-                class="{{ Route::currentRouteName() == 'salaries.index' ? 'active' : '' }}"
-                href="#"
+                class="{{ in_array(Route::currentRouteName(), 
+                            ['salaries.index', 'salaries.search']
+                        ) ? 'active' : '' }}"
+                href="{{ route('salaries.index') }}"
             >
                 Salaries
             </a>
         </li>
         <li>
             <a 
-                class="{{ Route::currentRouteName() == 'titles.index' ? 'active' : '' }}"
-                href="#"
+                class="{{ in_array(Route::currentRouteName(), 
+                            ['titles.index', 'titles.search']
+                        ) ? 'active' : '' }}"
+                href="{{ route('titles.index') }}"
             >
                 Titles
             </a>

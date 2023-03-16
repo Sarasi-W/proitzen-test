@@ -28,7 +28,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('employees/search', [EmployeeController::class, 'search'])->name('employees.search');
     Route::resource('employees', EmployeeController::class);
 
+    Route::get('salaries', [SalaryController::class, 'index'])->name('salaries.index');
+    Route::get('salaries/search', [SalaryController::class, 'search'])->name('salaries.search');
     Route::get('salaries/{salary}', [SalaryController::class, 'destroy'])->name('salaries.destroy');
     
+    Route::get('titles', [TitleController::class, 'index'])->name('titles.index');
+    Route::get('titles/search', [TitleController::class, 'search'])->name('titles.search');
     Route::get('titles/{title}', [TitleController::class, 'destroy'])->name('titles.destroy');
 });
