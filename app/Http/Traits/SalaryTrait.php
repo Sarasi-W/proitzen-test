@@ -25,12 +25,28 @@ trait SalaryTrait {
     
     public function storeSalary(Array $data, string $employee)
     {
-        $salary = Salary::create([
-            'emp_no' => $employee,
-            'amount' => $data['amount'],
-            'from_date' => $data['salary_from_date'],
-            'to_date' => $data['salary_to_date'] ?? null,
-        ]);
+        $current_records = Salary::where([
+                                    ['emp_no', '=', $employee],
+                                    ['amount', '=', $data['amount']],
+                                    ['from_date', '=' ,$data['salary_from_date']],
+                                ])->get();
+        
+        if ($current_records->count() == 1 && isset( $data['salary_to_date'] )) {
+            $salary = $current_records->first();
+
+            $salary->to_date = $data['salary_to_date'];
+            
+            $salary->save();
+        }
+
+        if ($current_records->count() == 0) {
+            $salary = Salary::create([
+                'emp_no' => $employee,
+                'amount' => $data['amount'],
+                'from_date' => $data['salary_from_date'],
+                'to_date' => $data['salary_to_date'] ?? null,
+            ]);
+        }
 
         return redirect()->back()->with('success', 'The employee salary details are successfully created.');
     }

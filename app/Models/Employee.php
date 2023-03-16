@@ -24,12 +24,12 @@ class Employee extends Model
 
     public function salaries()
     {
-        return $this->hasMany(Salary::class, 'emp_no', 'id');
+        return $this->hasMany(Salary::class, 'emp_no', 'id')->orderBy('id', 'desc');
     }
 
     public function titles()
     {
-        return $this->hasMany(Title::class, 'emp_no', 'id');
+        return $this->hasMany(Title::class, 'emp_no', 'id')->orderBy('id', 'desc');
     }
 
     public function current_salary()

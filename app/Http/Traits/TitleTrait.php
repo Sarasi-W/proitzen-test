@@ -25,13 +25,29 @@ trait TitleTrait {
     
     public function storeTitle(Array $data, string $employee)
     {
-        $title = Title::create([
-            'emp_no' => $employee,
-            'designation' => $data['title'],
-            'from_date' => $data['title_from_date'],
-            'to_date' => $data['title_to_date'] ?? null,
-        ]);
+        $current_records = Title::where([
+                                    ['emp_no', '=', $employee],
+                                    ['designation', '=', $data['title']],
+                                    ['from_date', '=' ,$data['title_from_date']],
+                                ])->get();
 
+        if ($current_records->count() == 1 && isset( $data['title_to_date'] )) {
+            $title = $current_records->first();
+
+            $title->to_date = $data['title_to_date'];
+            
+            $title->save();
+        }
+        
+        if ($current_records->count() == 0) {
+            $title = Title::create([
+                'emp_no' => $employee,
+                'designation' => $data['title'],
+                'from_date' => $data['title_from_date'],
+                'to_date' => $data['title_to_date'] ?? null,
+            ]);
+        }
+        
         return redirect()->back()->with('success', 'The employee designation details are successfully created.');
     }
 
