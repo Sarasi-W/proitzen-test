@@ -32,7 +32,3 @@ Login to the System
 username: admin@admin.com
 password: password
 ```
-
-
-
-
