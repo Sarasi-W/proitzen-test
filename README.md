@@ -6,19 +6,16 @@
 git clone git@github.com:Sarasi-W/proitzen-test.git
 cd proitzen-test
 cp .env.example .env
-php artisan key:generate
 ```
 
 Update .env file with database configuration
 
+Checkout to dev branch and get a pull
 
 ```
-composer update
-npm install
-npm run dev
+composer install
+php artisan key:generate
 ```
-
-checkout to dev branch and get a pull
 
 ```
 php artisan migrate
