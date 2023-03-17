@@ -46,7 +46,7 @@
                         <input type="text" name="q" class="form-control float-right" placeholder="Search">
 
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
+                            <button type="submit" class="btn btn-default bg-secondary">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
