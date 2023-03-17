@@ -17,8 +17,20 @@
                 <div class="modal-footer">
                     <div class="row w-100">
                         <div class="col">
-                            <button type="button" class="btn btn-outline-secondary float-end" aria-label="Close" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-danger float-end mx-2">Delete</button>       
+                            <button 
+                                type="button" 
+                                class="btn btn-outline-secondary float-end" 
+                                aria-label="Close" 
+                                data-dismiss="modal"
+                            >
+                                Cancel
+                            </button>
+                            <button 
+                                type="submit" 
+                                class="btn btn-danger float-end mx-2"
+                            >
+                                Delete
+                            </button>       
                         </div>
                         
                     </div>
