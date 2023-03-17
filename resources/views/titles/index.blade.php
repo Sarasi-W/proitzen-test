@@ -71,7 +71,9 @@
                             <td>{{ $title->from_date->format('d-m-Y') }}</td>
                             <td>{{ $title->to_date ? $title->to_date->format('d-m-Y') : '' }}</td>
                             <td>
-                                <a href="{{ route('employees.show', $title->employee->id) }}" type="button" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <a href="{{ route('employees.show', $title->employee->id) }}" type="button" class="btn btn-success">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach

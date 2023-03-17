@@ -71,7 +71,9 @@
                             <td>{{ $salary->from_date->format('d-m-Y') }}</td>
                             <td>{{ $salary->to_date ? $salary->to_date->format('d-m-Y') : '' }}</td>
                             <td>
-                                <a href="{{ route('employees.show', $salary->employee->id) }}" type="button" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <a href="{{ route('employees.show', $salary->employee->id) }}" type="button" class="btn btn-success">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach

@@ -14,7 +14,10 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('employees.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('employees.index') }}" class="small-box-footer">
+                            More info 
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -28,7 +31,10 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('salaries.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('salaries.index') }}" class="small-box-footer">
+                            More info 
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -42,7 +48,10 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('titles.index') }}" class="small-box-footer text-white">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('titles.index') }}" class="small-box-footer text-white">
+                            More info 
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
