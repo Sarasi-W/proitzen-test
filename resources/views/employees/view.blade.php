@@ -99,12 +99,13 @@
                                 <th scope="col center">Amount</th>
                                 <th scope="col">From date</th>
                                 <th scope="col">To Date</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ($employee->salaries->isEmpty())
                                 <tr>
-                                    <td colspan="3" class="text-center py-4">No Records found.</td>
+                                    <td colspan="4" class="text-center py-4">No Records found.</td>
                                 </tr>
                             @else
                             
@@ -113,6 +114,12 @@
                                         <th scope="row">Rs.{{ $salary->amount }}</th>
                                         <td>{{ $salary->from_date->format('d-m-Y') }}</td>
                                         <td>{{ $salary->to_date ? $salary->to_date->format('d-m-Y') : '' }}</td>
+                                        <td>{{ $salary->to_date ? $salary->to_date->format('d-m-Y') : '' }}</td>
+                                        <td>
+                                            <a href="{{ route('salaries.destroy', $salary->id) }}" class="btn btn-danger">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach  
                             @endif  
