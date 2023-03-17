@@ -414,11 +414,11 @@
                     </div>
 
                     <div class="card-footer">
+                        <a type="button" href="{{ route('employees.index') }}" class="btn btn-warning float-end mx-2">Go Back</a>
+                        <button type="reset" class="btn btn-secondary float-end">Cancel</button>
                         <button type="submit" class="btn btn-primary float-end mx-2">
                             {{ Route::currentRouteName() == 'employees.edit' ? 'Update' : 'Submit' }}
                         </button>
-                        <button type="reset" class="btn btn-secondary float-end">Cancel</button>
-                        <a type="button" href="{{ route('employees.index') }}" class="btn btn-warning float-end mx-2">Go Back</a>
                     </div>
 
                 </div>
