@@ -67,7 +67,7 @@
                         <tr>
                             <td>{{ $salary->id }}</td>
                             <td>{{ $salary->employee->first_name }} {{ $salary->employee->last_name }}</td>
-                            <td>{{ $salary->amount }}</td>
+                            <td>Rs.{{ $salary->amount }}</td>
                             <td>{{ $salary->from_date->format('d-m-Y') }}</td>
                             <td>{{ $salary->to_date ? $salary->to_date->format('d-m-Y') : '' }}</td>
                             <td>
