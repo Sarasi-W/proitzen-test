@@ -92,9 +92,19 @@
                             <td>{{ $employee->hire_date->format('d-m-Y') }}</td>
                             <td>{{ $employee->birth_date->format('d-m-Y') }}</td>
                             <td>
-                                <a href="{{ route('employees.show', $employee->id) }}" type="button" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                <a href="{{ route('employees.edit', $employee->id) }}" type="button" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$employee->id}})" data-target="#DeleteModal" class="btn btn-danger">
+                                <a href="{{ route('employees.show', $employee->id) }}" type="button" class="btn btn-success">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
+                                <a href="{{ route('employees.edit', $employee->id) }}" type="button" class="btn btn-warning">
+                                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                </a>
+                                <a 
+                                    href="javascript:;" 
+                                    data-toggle="modal" 
+                                    onclick="deleteData({{$employee->id}})" 
+                                    data-target="#DeleteModal" 
+                                    class="btn btn-danger"
+                                >
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
                             </td>
