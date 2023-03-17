@@ -135,12 +135,13 @@
                                 <th scope="col center">Title</th>
                                 <th scope="col">From date</th>
                                 <th scope="col">To Date</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ($employee->titles->isEmpty())
                                 <tr>
-                                    <td colspan="3" class="text-center py-4">No Records found.</td>
+                                    <td colspan="4" class="text-center py-4">No Records found.</td>
                                 </tr>
                             @else
                             
@@ -149,6 +150,11 @@
                                         <th scope="row">{{ $title->designation }}</th>
                                         <td>{{ $title->from_date->format('d-m-Y') }}</td>
                                         <td>{{ $title->to_date ? $title->to_date->format('d-m-Y') : '' }}</td>
+                                        <td>
+                                            <a href="{{ route('titles.destroy', $title->id) }}" class="btn btn-danger">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach  
                             @endif  
